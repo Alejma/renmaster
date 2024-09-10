@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ApartamentsService } from '../services/apartaments.service';
 import { Apartament, Apartaments } from '../../types';
 import { ApartamentComponent } from '../component/apartament/apartament.component';
 import { CommonModule } from '@angular/common';
-import { PaginatorModule } from 'primeng/paginator';
+import { Paginator, PaginatorModule } from 'primeng/paginator';
 import { EditPopupComponent } from "../component/edit-popup/edit-popup.component";
 import { ButtonModule } from 'primeng/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ApartamentComponent, CommonModule, PaginatorModule, EditPopupComponent, ButtonModule],
+  imports: [ApartamentComponent, CommonModule, PaginatorModule, EditPopupComponent, ButtonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -19,6 +20,8 @@ export class HomeComponent {
   constructor(
     private apartamentsService: ApartamentsService
   ){}
+
+  @ViewChild('paginator') paginator: Paginator | undefined;
 
   apartments: Apartament[] = [];
 
@@ -34,7 +37,10 @@ export class HomeComponent {
   }
 
   toggleDeletePopup(apartament: Apartament){
-    
+    if (!apartament.id) {
+      return;
+    }
+    this.deleteApartment(apartament.id);
   }
 
   toggleAddPopup(){
@@ -70,6 +76,10 @@ export class HomeComponent {
     this.fetchApartments(event.page, event.rows);
   }
 
+  resetPaginator(){
+    this.paginator?.changePage(0);
+  }
+
   fetchApartments(page: number, perPage: number){
     this.apartamentsService.getApartments('http://localhost:3000/apartments', { page, perPage})
     .subscribe({
@@ -89,6 +99,7 @@ export class HomeComponent {
       next: (data) => {
         console.log(data);
         this.fetchApartments(0, this.rows);
+        this.resetPaginator();
       },
       error: (error) => {
         console.log(error);
@@ -103,6 +114,7 @@ export class HomeComponent {
       next: (data) => {
         console.log(data);
         this.fetchApartments(0, this.rows);
+        this.resetPaginator();
       },
       error: (error) => {
         console.log(error);
@@ -117,6 +129,7 @@ export class HomeComponent {
       next: (data) => {
         console.log(data);
         this.fetchApartments(0, this.rows);
+        this.resetPaginator();
       },
       error: (error) => {
         console.log(error);

@@ -21,20 +21,21 @@
             [totalRecords]="totalRecords"
             [rowsPerPageOptions]="[5,10,20]"
             (onPageChange)="onPageCHange($event)"
+            #paginator
         ></p-paginator>
 </div>
 
 <!-- Edit Apartment-->
  <app-edit-popup
+    [(display)]="displayEditPopup"
     [apartment]="selectedApartment"
-    [display]="displayAddPopup"
     (confirm)="onConfirmEdit($event)"
     header="Edit Apartment"
     ></app-edit-popup>
 
 <!-- Add Apartment-->
 <app-edit-popup
-    [display]="displayAddPopup"
+    [(display)]="displayAddPopup"
     (confirm)="onConfirmAdd($event)"
     header="Add Apartment"
     ></app-edit-popup>

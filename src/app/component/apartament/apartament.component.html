@@ -12,9 +12,11 @@
         <span class="price-label">Precio:</span>
         <span class="price">{{ apartament.price }}</span>
     </div>
-    <div class="row">
-        <button pButton type="button" icon="pi pi-pencil" (click)="editApartment()">Edit</button>
-        <button pButton type="button" icon="pi pi-trash" (click)="deleteApartment()">Delete</button>
+    <div class="row gap-05">
+        <button pButton type="button" icon="pi pi-pencil" (click)="editApartment()" label="Edit"></button>
+        <button pButton type="button" icon="pi pi-trash" (click)="confirmDelete()" label="Delete" class="p-button-danger" #deleteButton></button>
     </div>
 
 </div>
+
+<p-confirmPopup></p-confirmPopup>
