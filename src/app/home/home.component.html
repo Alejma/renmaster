@@ -1,0 +1,40 @@
+<div class="column gap-1">
+    <!--Add Apartment Button-->
+    <button
+    type="button"
+    pButton
+    icon="pi pi-plus"
+    (click)="toggleAddPopup()"
+    label="Add Apartment">
+    </button>
+    <!--Apartament section-->
+    <div class="row wrap gap-1 space-between">
+        <app-apartament *ngFor="let apartament of apartments" [apartament]="apartament"
+        (edit)="toggleEditPopup($event)"
+        (delete)="toggleDeletePopup($event)"
+        ></app-apartament>
+    </div>
+
+    <!-- Pagination -->
+        <p-paginator
+            [rows]="rows"
+            [totalRecords]="totalRecords"
+            [rowsPerPageOptions]="[5,10,20]"
+            (onPageChange)="onPageCHange($event)"
+        ></p-paginator>
+</div>
+
+<!-- Edit Apartment-->
+ <app-edit-popup
+    [apartment]="selectedApartment"
+    [display]="displayAddPopup"
+    (confirm)="onConfirmEdit($event)"
+    header="Edit Apartment"
+    ></app-edit-popup>
+
+<!-- Add Apartment-->
+<app-edit-popup
+    [display]="displayAddPopup"
+    (confirm)="onConfirmAdd($event)"
+    header="Add Apartment"
+    ></app-edit-popup>

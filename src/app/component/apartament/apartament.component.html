@@ -1,0 +1,20 @@
+<div class="column gap-1 wrapper">
+    <img [src]="apartament.image" alt="Apartment Thumbnail">
+    <h2 class="title">{{ apartament.name }}</h2>
+
+
+    <div class="row">
+        <span class="tenant"></span>
+        <span class="tenant-label">{{ apartament.tenant }}</span>
+    </div>
+
+    <div class="row">
+        <span class="price-label">Precio:</span>
+        <span class="price">{{ apartament.price }}</span>
+    </div>
+    <div class="row">
+        <button pButton type="button" icon="pi pi-pencil" (click)="editApartment()">Edit</button>
+        <button pButton type="button" icon="pi pi-trash" (click)="deleteApartment()">Delete</button>
+    </div>
+
+</div>

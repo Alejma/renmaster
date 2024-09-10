@@ -1,0 +1,34 @@
+<p-dialog header="Add Apartment" [(visible)]="display" [modal]="true" [closable]="false">
+
+    <div class="column gap-1">
+        <!-- Name -->
+        <div class="row gap-05">
+            <span class="price-label">Name</span>
+            <input type="text" [(ngModel)]="apartment.name"/>
+        </div>
+
+        <!-- Price -->
+        <div class="row gap-05">
+            <span class="price-label">Price</span>
+            <input type="text" [(ngModel)]="apartment.price"/>
+        </div>
+
+        <!-- Image -->
+        <div class="row gap-05">
+            <span class="price-label">Image</span>
+            <input type="text" [(ngModel)]="apartment.image"/>
+        </div>
+
+        <!-- Tenant -->
+        <div class="row gap-05">
+            <span class="tenant-label">Tenant</span>
+            <input type="text" [(ngModel)]="apartment.tenant"/>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row full-center">
+            <button pButton type="button" label="Save" (click)="onConfirm()">Save</button>
+            <button pButton type="button" label="Cancel" (click)="onCancel()">Cancel</button>
+        </div>
+    </p-footer>
+</p-dialog>
